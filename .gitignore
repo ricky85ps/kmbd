@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+#Eclipse Gedoens
+.settings
+
+README.html
+Debug/k*
