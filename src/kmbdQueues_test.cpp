@@ -17,7 +17,7 @@ public:
 };
 
 
-static bool enqueueTwiceFirst(void)
+TEST_CASE( "enqueueTwiceFirst", "[Queues]" )
 {
 	Queue<MyElement> myQueue;
 	bool succeed;
@@ -25,19 +25,15 @@ static bool enqueueTwiceFirst(void)
 	MyElement testElement;
 
 	//! this must succeed, because list is empty
-	succeed = myQueue.enqueue(&testElement);
+	REQUIRE(myQueue.enqueue(&testElement));
 
-	if(succeed){
-		//! this must fail per definition DEF01 in kEmbeddedQueues.h
-		succeed = myQueue.enqueue(&testElement);
-		succeed = not succeed;
-	}
+	//! this must fail per definition DEF01 in kEmbeddedQueues.h
+	REQUIRE( not myQueue.enqueue(&testElement) );
 
-	return succeed;
 }
 
 
-static bool enqueueAndDequeue257(void)
+TEST_CASE( "enqueueAndDequeue257", "[Queues]" )
 {
 	Queue<MyElement> myQueue;
 	bool succeed = true;
@@ -61,12 +57,10 @@ static bool enqueueAndDequeue257(void)
 		}
 		j++;
 	}
-
-
-	return succeed;
+	REQUIRE(succeed);
 }
 
-static bool enqueueTwiceAfter257(void)
+TEST_CASE( "enqueueTwiceAfter257", "[Queues]" )
 {
 	Queue<MyElement> myQueue;
 	bool succeed;
@@ -75,25 +69,12 @@ static bool enqueueTwiceAfter257(void)
 	std::array<MyElement, 257> MyArray;
 
 	//! this must succeed, because list is empty
-	succeed = myQueue.enqueue(&testElement);
+	REQUIRE(myQueue.enqueue(&testElement));
 
-	if(succeed){
-		for(auto& myElement : MyArray)
-		{
-			myQueue.enqueue(&myElement);
-		}
-		//! this must fail per definition DEF01 in kEmbeddedQueues.h
-		succeed = myQueue.enqueue(&testElement);
-		succeed = not succeed;
+	for(auto& myElement : MyArray)
+	{
+		myQueue.enqueue(&myElement);
 	}
-
-	return succeed;
-}
-
-
-TEST_CASE( "Queues Test", "[Queues]" )
-{
-    REQUIRE( enqueueTwiceFirst() );
-    REQUIRE( enqueueAndDequeue257() );
-    REQUIRE( enqueueTwiceAfter257() );
+	//! this must fail per definition DEF01 in kEmbeddedQueues.h
+	REQUIRE(not myQueue.enqueue(&testElement));
 }
