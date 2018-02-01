@@ -1,3 +1,4 @@
+
 /*! \file
 	Tests of kEmbeddedLib are started here. The tests are intended to work on
 	an embedded device, but this file is for host usage only

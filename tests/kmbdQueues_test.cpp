@@ -2,11 +2,10 @@
 
  */
 
-#include "catch.hpp"
 #include "kmbdQueues.h"
 
-
 #include <array>
+#include "catch.hpp"
 
 
 using namespace kmbd;
