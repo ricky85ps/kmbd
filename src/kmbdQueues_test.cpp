@@ -11,7 +11,7 @@
 
 using namespace kmbd;
 
-class MyElement : public Queue<MyElement>::element{
+class MyElement : public Queue<MyElement>::Element{
 public:
 	int number;
 };

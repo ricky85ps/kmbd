@@ -24,19 +24,20 @@ static constexpr char QueuesId[] = "$Id$";
 class GenericQueue{
 
 private:
-	typedef struct elementtag{
-		elementtag* pNext;
-	}element;
+	class Element{
+	public:
+		Element* pNext;
+	};
 
 protected:
 	GenericQueue() : pFirstMessage(nullptr)
 	{}
 
-	element* pFirstMessage;
+	Element* pFirstMessage;
 
 	bool enqueue(void* vreq)
 	{
-		element* req = static_cast<element*>(vreq);
+		Element* req = static_cast<Element*>(vreq);
 		bool enqeue = true;
 		if(pFirstMessage == nullptr)
 		{
@@ -44,7 +45,7 @@ protected:
 			pFirstMessage = req;
 		}else
 		{
-			element* pCurr = pFirstMessage;
+			Element* pCurr = pFirstMessage;
 			if(pCurr==req){
 				enqeue = false;
 			}
@@ -66,7 +67,7 @@ protected:
 
 	void* dequeue(void)// returns nullptr if queue is empty
 	{
-		element* pCurr = pFirstMessage;
+		Element* pCurr = pFirstMessage;
 		if(pCurr != nullptr){
 			pFirstMessage = pCurr->pNext;
 		}
@@ -77,12 +78,13 @@ protected:
 
 template<typename T> class Queue: private GenericQueue{
 public:
-	typedef struct elementtag{
-		elementtag* pNext;
-	}element;
+	class Element{
+	public:
+		Element* pNext;
+	};
 
 	//! returns true if succesfully enqueued
-	bool enqueue(element* req)
+	bool enqueue(Element* req)
 		{ return GenericQueue::enqueue(req); }
 
 	T* dequeue(void)
