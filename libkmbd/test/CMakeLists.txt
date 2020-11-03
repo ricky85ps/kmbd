@@ -10,5 +10,4 @@ target_link_libraries(${thisTarget} PRIVATE kEmbedded)
 
 add_test(NAME testAll
 	COMMAND ${thisTarget}
-	WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
 )

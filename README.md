@@ -1,3 +1,5 @@
+![CMake](https://github.com/ricky85ps/kmbd/workflows/CMake/badge.svg)
+
 # kEmbedded library (kmbd)
 This library shall support functionality specialized to embedded systems. Test cases are also checked in.
 If you want to run these, you can build it using make and run `kmbd/Debug/kEmbeddedLib`.
@@ -10,5 +12,5 @@ mkdir myBuildFolder
 cd myBuildFolder
 cmake ..
 cmake --build .
-cmake --target TestAll
+ctest
 ```
